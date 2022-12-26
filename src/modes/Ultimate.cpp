@@ -21,11 +21,15 @@ void Ultimate::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.x = inputs.x;
     outputs.y = inputs.y;
     outputs.buttonR = inputs.z;
+    //outputs.buttonL = inputs.k4; I think this physical button may not exist?
     outputs.triggerLDigital = inputs.l;
     outputs.triggerRDigital = inputs.r;
     outputs.start = inputs.start;
     outputs.select = inputs.select;
     outputs.home = inputs.home;
+
+    //outputs.leftStickClick = inputs. ? todo;
+    //outputs.rightStickClick = inputs.k4;
 
     // Turn on D-Pad layer by holding Mod X + Mod Y or Nunchuk C button.
     if ((inputs.mod_x && inputs.mod_y) || inputs.nunchuk_c) {
@@ -274,5 +278,16 @@ void Ultimate::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
     if (inputs.nunchuk_connected) {
         outputs.leftStickX = inputs.nunchuk_x;
         outputs.leftStickY = inputs.nunchuk_y;
+    }
+
+    if (inputs.mod_x2)
+    {
+        //outputs.leftStickX = 128 + (directions.x * 67);
+        //outputs.leftStickY = 128 + (directions.y * 35);
+        outputs.leftStickX = ANALOG_STICK_MAX;
+    }
+    if (inputs.mod_y2)
+    {
+        outputs.leftStickY = ANALOG_STICK_MAX;
     }
 }

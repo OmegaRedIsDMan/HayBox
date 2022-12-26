@@ -29,6 +29,11 @@ typedef struct inputstate {
     bool mod_x = false;
     bool mod_y = false;
 
+    bool mod_x2 = false;
+    bool mod_y2 = false;
+    bool capture = false; // TODO: figure out how to represent this in the output state
+    bool k4 = false;
+
     // Nunchuk inputs.
     bool nunchuk_connected = false;
     int8_t nunchuk_x = 0;
