@@ -8,7 +8,13 @@ FgcMode::FgcMode(socd::SocdType socd_type) : ControllerMode(socd_type) {
 }
 
 void FgcMode::HandleSocd(InputState &inputs) {
-    if (inputs.down && (inputs.mod_x || inputs.c_up)) {
+    // dhall - I think the up inputs here are all the same as 
+    // in the UpdateDigitalOutputs function below
+    if (inputs.down && (inputs.mod_x    || inputs.mod_y     ||
+                        inputs.mod_x2   || inputs.mod_y2    ||
+                        inputs.c_up     || inputs.c_down    ||
+                        inputs.c_left   || inputs.c_right   ||
+                        inputs.up       || inputs.a)) {
         inputs.down = false;
     }
     InputMode::HandleSocd(inputs);
@@ -21,9 +27,9 @@ void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.dpadDown = inputs.down;
     outputs.dpadUp =    inputs.mod_x    || inputs.mod_y     ||
                         inputs.mod_x2   || inputs.mod_y2    ||
-                        inputs.c_up     || inputs.c_down    ||
-                        inputs.c_left   || inputs.c_right   ||
-                        inputs.up       || inputs.a;
+                        /*inputs.c_up     ||*/ inputs.c_down    ||
+                        inputs.c_left   || /*inputs.c_right   ||*/
+                        /*inputs.up       ||*/ inputs.a;
 
     // Menu keys
     outputs.start = inputs.start;
